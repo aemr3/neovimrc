@@ -64,6 +64,33 @@ return {
       },
       { "<leader>sls", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Goto Symbol" },
       { "<leader>slS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Goto Symbol (Workspace)" },
+      {
+        "<leader>/",
+        function()
+          require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+            winblend = 10,
+            previewer = false,
+          }))
+        end,
+        desc = "[/] Fuzzily search in current buffer",
+      },
+      {
+        "<leader>s/",
+        function()
+          require("telescope.builtin").live_grep({
+            grep_open_files = true,
+            prompt_title = "Live Grep in Open Files",
+          })
+        end,
+        desc = "Search [/] in Open Files",
+      },
+      {
+        "<leader>sn",
+        function()
+          require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+        end,
+        desc = "Search Neovim Files",
+      },
     },
     opts = function()
       local actions = require("telescope.actions")
@@ -119,6 +146,31 @@ return {
           },
         },
       }
+    end,
+  },
+  {
+    "debugloop/telescope-undo.nvim",
+    dependencies = {
+      {
+        "nvim-telescope/telescope.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+      },
+    },
+    keys = {
+      {
+        "<leader>su",
+        "<cmd>Telescope undo<cr>",
+        desc = "undo history",
+      },
+    },
+    opts = {
+      extensions = {
+        undo = {},
+      },
+    },
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension("undo")
     end,
   },
   { "mg979/vim-visual-multi" },
@@ -417,10 +469,6 @@ return {
       local hi = require("mini.hipatterns")
       return {
         highlighters = {
-          fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-          hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
-          todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
-          note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
           hex_color = hi.gen_highlighter.hex_color({ priority = 2000 }),
         },
       }
