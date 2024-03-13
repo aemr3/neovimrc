@@ -25,7 +25,7 @@ return {
       require("lazydocker").setup({})
     end,
     keys = {
-      { "<leader>dd", "<cmd>Lazydocker<cr>", desc = "LazyDocker" },
+      { "<leader>ld", "<cmd>Lazydocker<cr>", desc = "LazyDocker" },
     },
   },
   {
