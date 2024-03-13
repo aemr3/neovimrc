@@ -25,6 +25,7 @@ return {
         "prisma-language-server",
         "ruff",
         "taplo",
+        "codelldb",
       },
     },
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -64,6 +65,23 @@ return {
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
+      {
+        "mrcjkb/rustaceanvim",
+        version = "^4",
+        ft = { "rust" },
+        keys = {
+          {
+            "<leader>rr",
+            "<cmd>RustLsp runnables<CR>",
+            desc = "LSP: [R]ust [R]unnables",
+          },
+          {
+            "<leader>rd",
+            "<cmd>RustLsp debuggables<CR>",
+            desc = "LSP: [R]ust [D]ebuggables",
+          },
+        },
+      },
     },
     opts = function()
       local lspconfig = require("lspconfig")
@@ -84,6 +102,7 @@ return {
           "omnisharp",
           "ruff_lsp",
           "gopls",
+          "rust_analyzer",
         },
         automatic_installation = true,
         handlers = {
@@ -91,7 +110,7 @@ return {
             require("lspconfig")[server_name].setup({})
           end,
           ["rust_analyzer"] = function()
-            require("rust-tools").setup({})
+            -- setup handled by rustaceanvim
           end,
           ["lua_ls"] = function()
             lspconfig.lua_ls.setup({
@@ -138,6 +157,7 @@ return {
             local gofmt = require("efmls-configs.formatters.gofmt")
             local taplo = require("efmls-configs.formatters.taplo")
             local dotnet_format = require("efmls-configs.formatters.dotnet_format")
+            local rustfmt = require("efmls-configs.formatters.rustfmt")
 
             lspconfig.efm.setup({
               filetypes = {
@@ -158,6 +178,7 @@ return {
                 "css",
                 "go",
                 "cs",
+                "rust",
                 "toml",
               },
               init_options = {
@@ -187,6 +208,7 @@ return {
                   css = { prettier_d },
                   go = { gofmt },
                   cs = { dotnet_format },
+                  rust = { rustfmt },
                   toml = { taplo },
                 },
               },

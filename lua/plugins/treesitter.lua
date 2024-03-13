@@ -67,6 +67,7 @@ return {
         "python",
         "query",
         "regex",
+        "rust",
         "sql",
         "toml",
         "tsx",
