@@ -506,4 +506,9 @@ return {
       -- stylua: ignore end
     end,
   },
+  "2nthony/qclose.nvim",
+  event = "VeryLazy",
+  opts = {
+    patterns = {},
+  },
 }
