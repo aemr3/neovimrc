@@ -20,11 +20,12 @@ return {
         "php-cs-fixer",
         "hadolint",
         "markdownlint",
-        "prettier",
+        "prettierd",
         "fixjson",
         "prisma-language-server",
         "ruff",
         "taplo",
+        "yq",
         "codelldb",
       },
     },
@@ -156,6 +157,7 @@ return {
             local ruff = require("efmls-configs.formatters.ruff")
             local gofmt = require("efmls-configs.formatters.gofmt")
             local taplo = require("efmls-configs.formatters.taplo")
+            local yq = require("efmls-configs.formatters.yq")
             local dotnet_format = require("efmls-configs.formatters.dotnet_format")
             local rustfmt = require("efmls-configs.formatters.rustfmt")
 
@@ -179,6 +181,7 @@ return {
                 "go",
                 "cs",
                 "rust",
+                "yaml",
                 "toml",
               },
               init_options = {
@@ -209,6 +212,7 @@ return {
                   go = { gofmt },
                   cs = { dotnet_format },
                   rust = { rustfmt },
+                  yaml = { yq },
                   toml = { taplo },
                 },
               },
