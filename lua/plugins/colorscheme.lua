@@ -1,11 +1,11 @@
 return {
   {
-    "navarasu/onedark.nvim",
+    "cuencapablo/rosebones",
     config = function()
-      require("onedark").setup({
+      require("rosebones").setup({
         transparency = true,
       })
-      vim.cmd.colorscheme("onedark")
+      vim.cmd.colorscheme("rosebones")
     end,
   },
   {
