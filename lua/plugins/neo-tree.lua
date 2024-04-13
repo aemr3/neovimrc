@@ -5,9 +5,9 @@ return {
       close_if_last_window = true,
       sources = {
         "filesystem",
-        -- "buffers",
-        -- "git_status",
-        -- "document_symbols",
+        "buffers",
+        "git_status",
+        "document_symbols",
       },
       default_source = "filesystem",
       source_selector = {
@@ -21,6 +21,7 @@ return {
         },
       },
       filesystem = {
+        follow_current_file = { enabled = true },
         filtered_items = {
           visible = true,
           never_show = {
@@ -28,6 +29,11 @@ return {
             ".DS_Store",
             ".git",
           },
+        },
+      },
+      window = {
+        mappings = {
+          ["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
         },
       },
     },
@@ -45,6 +51,13 @@ return {
           require("neo-tree.command").execute({ source = "buffers", toggle = true })
         end,
         desc = "Buffer explorer",
+      },
+      {
+        "<leader>se",
+        function()
+          require("neo-tree.command").execute({ source = "document_symbols", toggle = true })
+        end,
+        desc = "Symbols explorer",
       },
       { "<leader>fe", "<cmd>Neotree toggle<cr>", desc = "Browse Files" },
       { "<leader>e", "<leader>fe", desc = "Browse Files", remap = true },
