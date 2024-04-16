@@ -21,7 +21,6 @@ return {
         "hadolint",
         "markdownlint",
         "prettierd",
-        "fixjson",
         "prisma-language-server",
         "ruff",
         "taplo",
@@ -151,7 +150,6 @@ return {
             local stylua = require("efmls-configs.formatters.stylua")
             local eslint = require("efmls-configs.linters.eslint")
             local prettier_d = require("efmls-configs.formatters.prettier_d")
-            local fixjson = require("efmls-configs.formatters.fixjson")
             local shfmt = require("efmls-configs.formatters.shfmt")
             local hadolint = require("efmls-configs.linters.hadolint")
             local ruff = require("efmls-configs.formatters.ruff")
