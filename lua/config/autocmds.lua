@@ -26,7 +26,9 @@ autocmd("LspAttach", {
     map("n", "K", vim.lsp.buf.hover, { desc = "Show Documentation" })
     map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })
     map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ctions" })
-    map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ name = 'efm' })<cr>", { desc = "[C]ode [F]ormat" })
+    map("n", "<leader>cf", function()
+      require("conform").format({ lsp_fallback = true })
+    end, { desc = "[C]ode [F]ormat" })
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client and client.server_capabilities.documentHighlightProvider then

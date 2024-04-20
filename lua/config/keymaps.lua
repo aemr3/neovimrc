@@ -111,15 +111,24 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Editor
-local toggle_format_on_save = function()
-  vim.g.format_on_save = not vim.g.format_on_save
-  if vim.g.format_on_save then
-    vim.notify("Enabled Format On Save", vim.log.levels.INFO, { title = "Option" })
+local toggle_format_on_save_buffer = function()
+  vim.b.disable_autoformat = not vim.b.disable_autoformat
+  if vim.b.disable_autoformat then
+    vim.notify("Disabled Format On Save (Buffer)", vim.log.levels.WARN, { title = "Option" })
   else
-    vim.notify("Disabled Format On Save", vim.log.levels.WARN, { title = "Option" })
+    vim.notify("Enabled Format On Save (Buffer)", vim.log.levels.INFO, { title = "Option" })
   end
 end
-map("n", "<leader>uf", toggle_format_on_save, { desc = "Toggle Format On Save" })
+local toggle_format_on_save_global = function()
+  vim.g.disable_autoformat = not vim.g.disable_autoformat
+  if vim.g.disable_autoformat then
+    vim.notify("Disabled Format On Save (Global)", vim.log.levels.WARN, { title = "Option" })
+  else
+    vim.notify("Enabled Format On Save (Global)", vim.log.levels.INFO, { title = "Option" })
+  end
+end
+map("n", "<leader>uf", toggle_format_on_save_buffer, { desc = "Toggle Format On Save (Buffer)" })
+map("n", "<leader>uF", toggle_format_on_save_global, { desc = "Toggle Format On Save (Global)" })
 local quit = function()
   require("zen-mode").close()
   vim.cmd("qa")
