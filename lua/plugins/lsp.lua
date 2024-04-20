@@ -26,6 +26,8 @@ return {
         "taplo",
         "yq",
         "codelldb",
+        "goimports",
+        "actionlint",
       },
     },
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -92,7 +94,6 @@ return {
       end
       return {
         ensure_installed = {
-          "efm",
           "eslint",
           "tsserver",
           "tailwindcss",
@@ -145,78 +146,46 @@ return {
               },
             })
           end,
-          ["efm"] = function()
-            local luacheck = require("efmls-configs.linters.luacheck")
-            local stylua = require("efmls-configs.formatters.stylua")
-            local eslint = require("efmls-configs.linters.eslint")
-            local prettier_d = require("efmls-configs.formatters.prettier_d")
-            local shfmt = require("efmls-configs.formatters.shfmt")
-            local hadolint = require("efmls-configs.linters.hadolint")
-            local ruff = require("efmls-configs.formatters.ruff")
-            local gofmt = require("efmls-configs.formatters.gofmt")
-            local taplo = require("efmls-configs.formatters.taplo")
-            local yq = require("efmls-configs.formatters.yq")
-            local dotnet_format = require("efmls-configs.formatters.dotnet_format")
-            local rustfmt = require("efmls-configs.formatters.rustfmt")
-
-            lspconfig.efm.setup({
-              filetypes = {
-                "lua",
-                "python",
-                "json",
-                "jsonc",
-                "sh",
-                "javascript",
-                "javascriptreact",
-                "typescript",
-                "typescriptreact",
-                "svelte",
-                "vue",
-                "markdown",
-                "docker",
-                "html",
-                "css",
-                "go",
-                "cs",
-                "rust",
-                "yaml",
-                "toml",
-              },
-              init_options = {
-                documentFormatting = true,
-                documentRangeFormatting = true,
-                hover = true,
-                documentSymbol = true,
-                codeAction = true,
-                completion = true,
-              },
-              settings = {
-                languages = {
-                  lua = { luacheck, stylua },
-                  python = { ruff },
-                  typescript = { prettier_d },
-                  json = { eslint, prettier_d },
-                  jsonc = { eslint, prettier_d },
-                  sh = { shfmt },
-                  javascript = { prettier_d },
-                  javascriptreact = { prettier_d },
-                  typescriptreact = { prettier_d },
-                  svelte = { eslint, prettier_d },
-                  vue = { prettier_d },
-                  markdown = { prettier_d },
-                  docker = { hadolint, prettier_d },
-                  html = { prettier_d },
-                  css = { prettier_d },
-                  go = { gofmt },
-                  cs = { dotnet_format },
-                  rust = { rustfmt },
-                  yaml = { yq },
-                  toml = { taplo },
-                },
-              },
-            })
-          end,
         },
+      }
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+        python = { { "ruff", { "isort", "black" } } },
+        typescript = { { "prettierd", "prettier" } },
+        javascript = { { "prettierd", "prettier" } },
+        typescriptreact = { { "prettierd", "prettier" } },
+        javascriptreact = { { "prettierd", "prettier" } },
+        vue = { { "prettierd", "prettier" } },
+        svelte = { { "prettierd", "prettier" } },
+        json = { { "prettierd", "prettier" } },
+        jsonc = { { "prettierd", "prettier" } },
+        html = { { "prettierd", "prettier" } },
+        css = { { "prettierd", "prettier" } },
+        markdown = { { "prettierd", "prettier" } },
+        docker = { { "prettierd", "prettier" } },
+        sh = { "shfmt" },
+        go = { "goimports", "gofmt" },
+        rust = { "rustfmt" },
+        yaml = { "yq" },
+        toml = { "taplo" },
+      },
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_fallback = true,
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      require("lint").linters_by_ft = {
+        lua = { "luacheck" },
+        docker = { "hadolint" },
       }
     end,
   },

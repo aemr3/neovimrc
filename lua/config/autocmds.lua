@@ -43,33 +43,6 @@ autocmd("LspAttach", {
   end,
 })
 
--- auto format on save
-autocmd("BufWritePost", {
-  group = augroup("LspFormattingGroup", {}),
-  callback = function(ev)
-    local efm = vim.lsp.get_active_clients({ name = "efm", bufnr = ev.buf })
-    local ruff = vim.lsp.get_active_clients({ name = "ruff_lsp", bufnr = ev.buf })
-
-    if vim.tbl_isempty(efm) or vim.g.format_on_save == nil or not vim.g.format_on_save then
-      return
-    end
-
-    if not vim.tbl_isempty(ruff) then
-      vim.lsp.buf.code_action({
-        context = {
-          only = { "source.organizeImports.ruff" },
-        },
-        apply = true,
-      })
-      vim.wait(100)
-      vim.cmd(":w")
-    end
-
-    vim.lsp.buf.format({ name = "efm" })
-    vim.wait(100)
-  end,
-})
-
 -- highlight on yank
 autocmd("TextYankPost", {
   group = augroup("HighlightYankGroup", {}),
