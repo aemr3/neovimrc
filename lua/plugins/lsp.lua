@@ -155,7 +155,6 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        python = { { "ruff", { "isort", "black" } } },
         typescript = { { "prettierd", "prettier" } },
         javascript = { { "prettierd", "prettier" } },
         typescriptreact = { { "prettierd", "prettier" } },
@@ -173,6 +172,14 @@ return {
         rust = { "rustfmt" },
         yaml = { "yq" },
         toml = { "taplo" },
+        python = function(bufnr)
+          if require("conform").get_formatter_info("ruff_format", bufnr).available then
+            return { "ruff_fix", "ruff_format" }
+          else
+            return { "isort", "black" }
+          end
+        end,
+        ["_"] = { "trim_whitespace", "trim_newlines" },
       },
       format_on_save = {
         timeout_ms = 500,
