@@ -511,4 +511,15 @@ return {
   opts = {
     patterns = {},
   },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = {
+      size = 25,
+      open_mapping = [[<c-t>]],
+      autochdir = true,
+      direction = "horizontal",
+      close_on_exit = false,
+    },
+  },
 }
