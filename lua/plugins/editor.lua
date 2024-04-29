@@ -502,7 +502,7 @@ return {
       map("n", "<A-0>", function() harpoon:list():select(10) end, { desc = "Harpoon Select 10" })
       map("n", "<A-n>", function() harpoon:list():next() end, { desc = "Harpoon Select Next" })
       map("n", "<A-p>", function() harpoon:list():prev() end, { desc = "Harpoon Select Previous" })
-      map("n", "<A-a>", function() harpoon:list():append() end, { desc = "Harpoon Append" })
+      map("n", "<A-a>", function() harpoon:list():add() end, { desc = "Harpoon Append" })
       -- stylua: ignore end
     end,
   },
@@ -516,7 +516,7 @@ return {
     version = "*",
     opts = {
       size = 25,
-      open_mapping = [[<c-t>]],
+      open_mapping = [[<a-\>]],
       autochdir = true,
       direction = "horizontal",
       close_on_exit = false,
