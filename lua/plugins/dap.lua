@@ -15,7 +15,7 @@ return {
     {
       "rcarriga/nvim-dap-ui",
       dependencies = {
-        "nvim-neotest/nvim-nio"
+        "nvim-neotest/nvim-nio",
       },
       keys = {
         {

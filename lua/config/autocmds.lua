@@ -53,16 +53,6 @@ autocmd("TextYankPost", {
   end,
 })
 
--- select cached venv
-autocmd("DirChanged", {
-  callback = function()
-    local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
-    if venv ~= "" then
-      require("venv-selector").retrieve_from_cache()
-    end
-  end,
-})
-
 -- format prisma files
 autocmd("BufWritePost", {
   pattern = "*.prisma",
