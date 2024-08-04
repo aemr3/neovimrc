@@ -16,6 +16,7 @@ return {
           end)
         end,
       },
+      { "nvim-telescope/telescope-live-grep-args.nvim" },
     },
     keys = {
       {
@@ -32,7 +33,7 @@ return {
       -- git
       { "<leader>fc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
       -- search
-      { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Grep Files" },
+      { "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "Grep Files" },
       { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
       { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
@@ -171,6 +172,7 @@ return {
     config = function(_, opts)
       require("telescope").setup(opts)
       require("telescope").load_extension("undo")
+      require("telescope").load_extension("live_grep_args")
     end,
   },
   { "mg979/vim-visual-multi" },
