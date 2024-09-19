@@ -15,7 +15,7 @@ return {
         "docker-compose-language-service",
         "typescript-language-server",
         "eslint-lsp",
-        "intelephense",
+        "phpactor",
         "phpcs",
         "php-cs-fixer",
         "hadolint",
@@ -101,6 +101,7 @@ return {
           "jsonls",
           "omnisharp",
           "ruff_lsp",
+          "terraformls",
           "gopls",
           "rust_analyzer",
         },
@@ -171,6 +172,7 @@ return {
         rust = { "rustfmt" },
         yaml = { "yq" },
         toml = { "taplo" },
+        tf = { "terraform_fmt" },
         python = function(bufnr)
           if require("conform").get_formatter_info("ruff_format", bufnr).available then
             return { "ruff_fix", "ruff_format" }
