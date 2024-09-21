@@ -333,6 +333,7 @@ return {
       projects = {
         "~/Projects/*/*",
         "~/.config/*",
+        "~/app/*",
       },
       last_session_on_startup = false,
     },
