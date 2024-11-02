@@ -94,7 +94,7 @@ return {
       return {
         ensure_installed = {
           "eslint",
-          "tsserver",
+          "ts_ls",
           "tailwindcss",
           "pyright",
           "lua_ls",
